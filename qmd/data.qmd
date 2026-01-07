@@ -1,0 +1,9 @@
+---
+title: "Data"
+format:
+  html:
+    fig-width: 9
+    fig-height: 6
+execute: 
+  warning: false
+---

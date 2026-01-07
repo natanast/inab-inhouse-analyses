@@ -11,3 +11,11 @@ Welcome to the **INAB In-House Analyses** guide.
 This page provides internal documentation for performing standard bioinformatics analyses at the lab, including setup, data preprocessing, and downstream workflows.
 
 > **Note:** This document is for internal use only.
+
+## Authors
+
+```{r}
+
+```
+
+`r fontawesome::fa("github", "black")` [Natasa Anastasiadou](https://github.com/natanast)   `r fontawesome::fa("github", "black")` [Nikos Pechlivanis](https://github.com/npechl)

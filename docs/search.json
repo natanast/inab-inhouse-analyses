@@ -12,5 +12,12 @@
     "title": "INAB in-house analyses",
     "section": "",
     "text": "Welcome to the INAB In-House Analyses guide.\nThis page provides internal documentation for performing standard bioinformatics analyses at the lab, including setup, data preprocessing, and downstream workflows.\n\nNote: This document is for internal use only."
+  },
+  {
+    "objectID": "index.html#authors",
+    "href": "index.html#authors",
+    "title": "INAB in-house analyses",
+    "section": "Authors",
+    "text": "Authors\n Natasa Anastasiadou    Nikos Pechlivanis"
   }
 ]

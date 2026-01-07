@@ -8,3 +8,5 @@ website:
     left:
       - text: Home
         href: index.qmd
+      - text: Data & Metadata
+        href: qmd/data.qmd
