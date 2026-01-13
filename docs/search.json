@@ -144,7 +144,7 @@
     "href": "index.html#getting-started",
     "title": "Welcome",
     "section": "Getting Started",
-    "text": "Getting Started\nThe goal of this guide is to bridge the gap between wet-lab experiments and dry-lab results.\nYou will learn:\n\nhow to prepare your data correctly\nhow to use basic Unix commands\nhow to run analysis"
+    "text": "Getting Started\nThe goal of this guide is to bridge the gap between wet-lab experiments and dry-lab results.\nYou will learn:\n\nhow to prepare your data correctly\nhow to use basic Unix commands\nhow to run analyses in the computational infrastructure of INAB"
   },
   {
     "objectID": "index.html#your-roadmap",

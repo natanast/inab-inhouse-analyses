@@ -20,7 +20,7 @@ You will learn:
 
 -   how to prepare your data correctly
 -   how to use basic Unix commands
--   how to run analysis
+-   how to run analyses in the computational infrastructure of INAB
 
 ## Your Roadmap
 
