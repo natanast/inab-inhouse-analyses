@@ -11,7 +11,48 @@ execute:
 1.  Log in to the appropriate server:
 
     o 160.40.71.4
-    
+
 2.  Identify where your NGS results (.fastq files) are located:
 
     o e.g., /mnt/new_home/stamatopoulos_research/2025_05_21_ERIC_study
+
+3.  Move to the your working directory:
+
+    ``` bash
+    cd /work/folder_of_each_user
+    ```
+
+4.  Create a new analysis directory:
+
+    ``` bash
+    mkdir RNAseq_analysis_2025_05_21
+    ```
+
+5.  Move to the your new analysis directory:
+
+    ``` bash
+    cd /work/RNAseq_analysis_2025_05_21
+    ```
+
+6.  Download script to your analysis directory
+
+    ``` bash
+    wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/star.sh
+    wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/runSTAR.sh 
+    ```
+
+7.  Create a SampleList (you have to update with the right path to your fastq files), for example:
+
+    ``` bash
+    ls -la /mnt/new_home/stamatopoulos_research/RNAseq_2025_05_21 | awk '{print $9}' | awk -F "_R" '{print $1}' | sort | uniq     > SampleList
+    ```
+
+8.  Remove samples that should not be analyzed:
+
+    ``` bash
+    nano SampleList
+    ```
+
+    In order to **edit** the SampleList use the following:
+
+    o Delete button: removes one letter
