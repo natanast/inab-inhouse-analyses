@@ -271,5 +271,68 @@
     "title": "RNAseq analysis",
     "section": "",
     "text": "Log in to the appropriate server:\no 160.40.71.4\nIdentify where your NGS results (.fastq files) are located:\no e.g., /mnt/new_home/stamatopoulos_research/2025_05_21_ERIC_study\nMove to the your working directory:\ncd /work/folder_of_each_user\nCreate a new analysis directory:\nmkdir RNAseq_analysis_2025_05_21\nMove to the your new analysis directory:\ncd /work/RNAseq_analysis_2025_05_21\nDownload script to your analysis directory\nwget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/star.sh\nwget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/runSTAR.sh \nCreate a SampleList (you have to update with the right path to your fastq files), for example:\nls -la /mnt/new_home/stamatopoulos_research/RNAseq_2025_05_21 | awk '{print $9}' | awk -F \"_R\" '{print $1}' | sort | uniq     &gt; SampleList\nRemove samples that should not be analyzed:\nnano SampleList\nIn order to edit the SampleList use the following:\no Delete button: Removes one letter\no Ctrl + k: Removes a whole row\no Ctrl + o and Enter: Saves the modified SampleList\no Ctrl + x: Exits and returns to the terminal\nRun the analysis (you have to update with the right path):\nnohup bash runSTAR.sh\\\n/mnt/new_home/stamatopoulos_research/RNAseq_2025_05_21\\\nSampleList\\\n/mnt/new_home/bio_tmp/HSapRefData/hg38/gencode/star\\\n/mnt/new_home/bio_tmp/HSapRefData/hg38/gencode/gencode.v47.primary_assembly.basic.annotation.gtf\\\n16\\\n&\nAfter the analysis is completed, move your folder from /work to /mnt/new_home\ncd ..\nrsync -r \\\nRNAseq_analysis_2025_05_21 \\\n/mnt/new_home/stamatopoulos_research"
+  },
+  {
+    "objectID": "qmd/ena_deposit.html",
+    "href": "qmd/ena_deposit.html",
+    "title": "ENA Data Deposit",
+    "section": "",
+    "text": "Making your sequencing data public is a requirement for most journals and upholds FAIR principles."
+  },
+  {
+    "objectID": "qmd/ena_deposit.html#why-deposit-to-ena",
+    "href": "qmd/ena_deposit.html#why-deposit-to-ena",
+    "title": "ENA Data Deposit",
+    "section": "",
+    "text": "Making your sequencing data public is a requirement for most journals and upholds FAIR principles."
+  },
+  {
+    "objectID": "qmd/ena_deposit.html#prerequisites-what-do-i-need",
+    "href": "qmd/ena_deposit.html#prerequisites-what-do-i-need",
+    "title": "ENA Data Deposit",
+    "section": "Prerequisites (What do I need?)",
+    "text": "Prerequisites (What do I need?)\nBefore you start the submission process, ensure you have the following components ready.\n\nWebin Account: You need a submission account registered at ENA.\nFASTQ Files: Your raw sequencing data, compressed (.fastq.gz).\nFTP Client: A tool like FileZilla is required to transfer your files via FTP."
+  },
+  {
+    "objectID": "qmd/ena_deposit.html#data-integrity-md5-checksum",
+    "href": "qmd/ena_deposit.html#data-integrity-md5-checksum",
+    "title": "ENA Data Deposit",
+    "section": "Data Integrity (MD5 Checksum)",
+    "text": "Data Integrity (MD5 Checksum)\nWhen you upload large sequencing files, it is possible for the data to get corrupted during the transfer. To prevent this, we use MD5 checksums.\nThink of an MD5 checksum as a “digital fingerprint” for your file.\n\nmd5 checksum Generation for your fastq\ncd /path/to/your/desirable/directory\nmd5sum /mnt/new_home/illumina/nextseq2000/name/of/the/run/V*fastq* | awk '{print $2, $1}' &gt; filenames_and_checksums_date.txt"
+  },
+  {
+    "objectID": "qmd/ena_deposit.html#ftp-client-to-ena",
+    "href": "qmd/ena_deposit.html#ftp-client-to-ena",
+    "title": "ENA Data Deposit",
+    "section": "FTP Client to ENA",
+    "text": "FTP Client to ENA\nEstablish connection. Drag ‘n’ Drop fastq files."
+  },
+  {
+    "objectID": "qmd/ena_deposit.html#webin-submission-portal",
+    "href": "qmd/ena_deposit.html#webin-submission-portal",
+    "title": "ENA Data Deposit",
+    "section": "Webin Submission Portal",
+    "text": "Webin Submission Portal\nhttps://www.ebi.ac.uk/ena/submit/webin/login\nUse credentials to login. Navigate to tabs “Submit Reads” and “Register Samples”"
+  },
+  {
+    "objectID": "qmd/ena_deposit.html#the-manifest-file",
+    "href": "qmd/ena_deposit.html#the-manifest-file",
+    "title": "ENA Data Deposit",
+    "section": "The Manifest File",
+    "text": "The Manifest File\nThe first component of a successful submission is the Manifest file. This text file tells ENA exactly what your data is. It is submitted via the “Submit Reads” option. Create a file named manifest.tsv or download the spreadsheet template from Webin Submission Portal. For submitting paired reads using fastq files it is required to use the specific format.\nExample manifest.tsv:\nFileType fastq Read submission file type sample study instrument_model library_name library_source library_selection library_strategy library_layout forward_file_name forward_file_md5 reverse_file_name reverse_file_md5"
+  },
+  {
+    "objectID": "qmd/ena_deposit.html#the-metadata-file",
+    "href": "qmd/ena_deposit.html#the-metadata-file",
+    "title": "ENA Data Deposit",
+    "section": "The Metadata File",
+    "text": "The Metadata File\nThe second component of a successful submission is the Metadata file. This tab delimited file contains all the information about the submitted samples. It is submitted via the “Register Samples” option. Create a file named metadata.tsv or download a spreadsheet template from Webin Submission Portal alike Manifest. Note that the template varies depending on the specific checklist (e.g., GSC MIxS soil, Virus pathogen reporting standard) that matches your sample type. For submitting SARS-CoV-2, the respective checklist is ERC000033 (ENA virus pathogen reporting standard checklist)\nExample metadata.tsv:\nChecklist ERC000033 ENA virus pathogen reporting standard checklist tax_id scientific_name sample_alias sample_title sample_description collection date geographic location (country and/or sea) host common name host subject id host health state host sex host scientific name collector name collecting institution isolate common name"
+  },
+  {
+    "objectID": "qmd/ena_deposit.html#summarized-steps-for-success",
+    "href": "qmd/ena_deposit.html#summarized-steps-for-success",
+    "title": "ENA Data Deposit",
+    "section": "Summarized Steps for Success",
+    "text": "Summarized Steps for Success\n\nEstablish FTP connection with ENA.\nUpload the fastq files (Drag’n’Drop)\nLogin to Webin Submission Portal\nUpload manifest.tsv through “Submit Reads”\nUpload metadata.tsv through “Register Samples”\nWin"
   }
 ]

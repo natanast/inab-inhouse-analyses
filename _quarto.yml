@@ -22,14 +22,14 @@ website:
             href: qmd/bases2fastq.qmd
           - text: fastqc
             href: qmd/fastqc.qmd
-          - text: Merge lanes
-            href: qmd/merge_lanes.qmd
+          # - text: Merge lanes
+          #   href: qmd/merge_lanes.qmd
           - text: RNAseq analysis
             href: qmd/rnaseq.qmd
           - text: ENA
             href: qmd/ena_deposit.qmd
-          - text: ERGO-ii
-            href: qmd/ergo.qmd
+          # - text: ERGO-ii
+          #   href: qmd/ergo.qmd
         
         
             

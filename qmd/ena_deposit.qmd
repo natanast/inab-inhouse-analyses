@@ -1,19 +1,16 @@
 ---
 title: "ENA Data Deposit"
-editor: 
-  markdown: 
-    wrap: 72
+execute:
+  echo: false
 ---
 
 ## Why Deposit to ENA?
 
-Making your sequencing data public is a requirement for most journals
-and upholds FAIR principles.\
+Making your sequencing data public is a requirement for most journals and upholds FAIR principles.\
 
 ## Prerequisites (What do I need?)
 
-Before you start the submission process, ensure you have the following
-components ready.
+Before you start the submission process, ensure you have the following components ready.
 
 -   **Webin Account**: You need a submission account registered at ENA.
 -   **FASTQ Files**: Your raw sequencing data, compressed (`.fastq.gz`).
@@ -27,52 +24,45 @@ Think of an MD5 checksum as a "digital fingerprint" for your file.
 
 ### md5 checksum Generation for your fastq
 
+``` bash
 cd /path/to/your/desirable/directory
+```
+
+``` bash
 md5sum /mnt/new_home/illumina/nextseq2000/name/of/the/run/V*fastq* | awk '{print $2, $1}' > filenames_and_checksums_date.txt
+```
 
 ## FTP Client to ENA
 
-Establish connection.
-Drag 'n' Drop fastq files.
+Establish connection. Drag 'n' Drop fastq files.
 
 ## Webin Submission Portal
 
 https://www.ebi.ac.uk/ena/submit/webin/login
 
-Use credentials to login.
-Navigate to tabs "Submit Reads" and "Register Samples"
+Use credentials to login. Navigate to tabs "Submit Reads" and "Register Samples"
 
 ## The Manifest File
 
-The first component of a successful submission is the **Manifest file**. This text file
-tells ENA exactly what your data is. It is submitted via the "Submit Reads" option.
-Create a file named `manifest.tsv` or download the spreadsheet template from Webin Submission Portal.
-For submitting paired reads using fastq files it is required to use the specific format.
+The first component of a successful submission is the **Manifest file**. This text file tells ENA exactly what your data is. It is submitted via the "Submit Reads" option. Create a file named `manifest.tsv` or download the spreadsheet template from Webin Submission Portal. For submitting paired reads using fastq files it is required to use the specific format.
 
 **Example manifest.tsv:**
 
-FileType	fastq	Read submission file type
-sample	study	instrument_model	library_name	library_source	library_selection	library_strategy	library_layout	forward_file_name	forward_file_md5	reverse_file_name	reverse_file_md5
+FileType fastq Read submission file type sample study instrument_model library_name library_source library_selection library_strategy library_layout forward_file_name forward_file_md5 reverse_file_name reverse_file_md5
 
 ## The Metadata File
 
-The second component of a successful submission is the **Metadata file**. This tab delimited file
-contains all the information about the submitted samples. It is submitted via the "Register Samples" option.
-Create a file named `metadata.tsv` or download a spreadsheet template from Webin Submission Portal alike Manifest.
-Note that the template **varies** depending on the specific **checklist** (e.g., *GSC MIxS soil*, *Virus pathogen reporting standard*) 
-that matches your sample type.
-For submitting SARS-CoV-2, the respective checklist is **ERC000033** (ENA virus pathogen reporting standard checklist)
+The second component of a successful submission is the **Metadata file**. This tab delimited file contains all the information about the submitted samples. It is submitted via the "Register Samples" option. Create a file named `metadata.tsv` or download a spreadsheet template from Webin Submission Portal alike Manifest. Note that the template **varies** depending on the specific **checklist** (e.g., *GSC MIxS soil*, *Virus pathogen reporting standard*) that matches your sample type. For submitting SARS-CoV-2, the respective checklist is **ERC000033** (ENA virus pathogen reporting standard checklist)
 
 **Example metadata.tsv:**
 
-Checklist	ERC000033	ENA virus pathogen reporting standard checklist
-tax_id	scientific_name	sample_alias	sample_title	sample_description	collection date	geographic location (country and/or sea)	host common name	host subject id	host health state	host sex	host scientific name	collector name	collecting institution	isolate	common name
+Checklist ERC000033 ENA virus pathogen reporting standard checklist tax_id scientific_name sample_alias sample_title sample_description collection date geographic location (country and/or sea) host common name host subject id host health state host sex host scientific name collector name collecting institution isolate common name
 
 ## Summarized Steps for Success
 
-- Establish FTP connection with ENA.
-- Upload the fastq files (Drag'n'Drop)
-- Login to Webin Submission Portal
-- Upload manifest.tsv through "Submit Reads"
-- Upload metadata.tsv through "Register Samples"
-- Win
+-   Establish FTP connection with ENA.
+-   Upload the fastq files (Drag'n'Drop)
+-   Login to Webin Submission Portal
+-   Upload manifest.tsv through "Submit Reads"
+-   Upload metadata.tsv through "Register Samples"
+-   Win

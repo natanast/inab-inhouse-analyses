@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>bases2fastq – INAB In-House Analysis</title>
+<title>ENA Data Deposit – INAB In-House Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">bases2fastq</h1>
+<h1 class="title">ENA Data Deposit</h1>
 </div>
 
 
@@ -206,49 +206,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="how-to-run-bases2fastq-in-the-computational-infrastructure-of-inab" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-run-bases2fastq-in-the-computational-infrastructure-of-inab">How to run <strong>bases2fastq</strong> in the computational infrastructure of INAB</h2>
-<section id="steps-to-run-bases2fastq-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="steps-to-run-bases2fastq-analysis">Steps to run bases2fastq analysis:</h3>
-<ol type="1">
-<li><p>Log in to the appropriate server:</p>
-<p>o 160.40.71.4</p></li>
-<li><p>Identify where your NGS results (.bcl files and SampleSheet) are located:</p>
-<p>o e.g., /mnt/new_home/element/AV240301/20250131_AV240301_SARSDIAGNOSIS</p></li>
-<li><p>Activate conda environment with dependencies for bases2fastq:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> activate /apps/miniconda3/envs/bases2fastq_dependencies</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Create your RunManifest.csv:</p>
-<p>o Information for preparing the RunManifest file can be found <a href="https://docs.elembio.io/docs/run-manifest/">here</a>.</p>
-<p>o You can add a column named Project containing the name of the respective project for each sample.</p>
-<p>o In the Data Section you can add a column named <strong>Project</strong> containing the name of the respective project for each sample.</p>
-<p>Project can only contain alphanumeric characters, dashes, and underscores.</p></li>
-<li><p>Move to your working folder:</p>
-<p>o In case there are <u>only samples from your lab</u> run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /mnt/new_home/stamatopoulos_research/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>o In case there are <u>samples from multiple labs</u> run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /mnt/new_home/illumina_common_fastq</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Upload your RunManifest.csv to your working folder.</p>
-<p>o Any SFTP program (e.g., Bitvise SSH Client) can be used to transfer RunManifest.csv. Just drag &amp; drop the file from the left to the right window.</p></li>
-<li><p>Define a distinctive name for the folder that will contain the bases2fastq results (e.g., 2025_05_21_ERIC_study) and use it as input (check the command below)</p></li>
-<li><p>Now you can execute bases2fastq (version 2.1.0.1522407762), based on the following command:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nohup</span> /apps/element/bases2fastq <span class="dt">\</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>--num-threads 16 <span class="dt">\</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>--group-fastq <span class="dt">\</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>--legacy-fastq <span class="dt">\</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>--run-manifest RunManifest.csv <span class="dt">\</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>/mnt/new_home/element/AV240301/20250131_AV240301_SARSDIAGNOSIS/ <span class="dt">\</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>2025_05_21_ERIC_study/ <span class="op">&gt;</span> ./2025_05_21_ERIC_study.log <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">&amp;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>After the command for bases2fastq has run successfully, move your RunManifest.csv to the output folder:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> RunManifest.csv 2025_05_21_ERIC_study</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Files older than <strong>2 weeks</strong> will be automatically <strong>deleted</strong> from shared folders!</p>
-<p>For this reason, if we have run the analysis in a shared folder such as <em>/mnt/new_home/element_common_fastq</em>, we should transfer the final files to our <strong>own</strong> subfolder, which will be located under our research group’s folder.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-r</span> <span class="dt">\</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>2025_05_21_ERIC_study <span class="dt">\</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>/mnt/new_home/stamatopoulos_research</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ol>
-
-
+<section id="why-deposit-to-ena" class="level2">
+<h2 class="anchored" data-anchor-id="why-deposit-to-ena">Why Deposit to ENA?</h2>
+<p>Making your sequencing data public is a requirement for most journals and upholds FAIR principles.<br>
+</p>
 </section>
+<section id="prerequisites-what-do-i-need" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisites-what-do-i-need">Prerequisites (What do I need?)</h2>
+<p>Before you start the submission process, ensure you have the following components ready.</p>
+<ul>
+<li><strong>Webin Account</strong>: You need a submission account registered at ENA.</li>
+<li><strong>FASTQ Files</strong>: Your raw sequencing data, compressed (<code>.fastq.gz</code>).</li>
+<li><strong>FTP Client</strong>: A tool like <strong>FileZilla</strong> is required to transfer your files via FTP.</li>
+</ul>
+</section>
+<section id="data-integrity-md5-checksum" class="level2">
+<h2 class="anchored" data-anchor-id="data-integrity-md5-checksum">Data Integrity (MD5 Checksum)</h2>
+<p>When you upload large sequencing files, it is possible for the data to get corrupted during the transfer. To prevent this, we use MD5 checksums.</p>
+<p>Think of an MD5 checksum as a “digital fingerprint” for your file.</p>
+<section id="md5-checksum-generation-for-your-fastq" class="level3">
+<h3 class="anchored" data-anchor-id="md5-checksum-generation-for-your-fastq">md5 checksum Generation for your fastq</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /path/to/your/desirable/directory</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">md5sum</span> /mnt/new_home/illumina/nextseq2000/name/of/the/run/V<span class="pp">*</span>fastq<span class="pp">*</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $2, $1}'</span> <span class="op">&gt;</span> filenames_and_checksums_date.txt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="ftp-client-to-ena" class="level2">
+<h2 class="anchored" data-anchor-id="ftp-client-to-ena">FTP Client to ENA</h2>
+<p>Establish connection. Drag ‘n’ Drop fastq files.</p>
+</section>
+<section id="webin-submission-portal" class="level2">
+<h2 class="anchored" data-anchor-id="webin-submission-portal">Webin Submission Portal</h2>
+<p>https://www.ebi.ac.uk/ena/submit/webin/login</p>
+<p>Use credentials to login. Navigate to tabs “Submit Reads” and “Register Samples”</p>
+</section>
+<section id="the-manifest-file" class="level2">
+<h2 class="anchored" data-anchor-id="the-manifest-file">The Manifest File</h2>
+<p>The first component of a successful submission is the <strong>Manifest file</strong>. This text file tells ENA exactly what your data is. It is submitted via the “Submit Reads” option. Create a file named <code>manifest.tsv</code> or download the spreadsheet template from Webin Submission Portal. For submitting paired reads using fastq files it is required to use the specific format.</p>
+<p><strong>Example manifest.tsv:</strong></p>
+<p>FileType fastq Read submission file type sample study instrument_model library_name library_source library_selection library_strategy library_layout forward_file_name forward_file_md5 reverse_file_name reverse_file_md5</p>
+</section>
+<section id="the-metadata-file" class="level2">
+<h2 class="anchored" data-anchor-id="the-metadata-file">The Metadata File</h2>
+<p>The second component of a successful submission is the <strong>Metadata file</strong>. This tab delimited file contains all the information about the submitted samples. It is submitted via the “Register Samples” option. Create a file named <code>metadata.tsv</code> or download a spreadsheet template from Webin Submission Portal alike Manifest. Note that the template <strong>varies</strong> depending on the specific <strong>checklist</strong> (e.g., <em>GSC MIxS soil</em>, <em>Virus pathogen reporting standard</em>) that matches your sample type. For submitting SARS-CoV-2, the respective checklist is <strong>ERC000033</strong> (ENA virus pathogen reporting standard checklist)</p>
+<p><strong>Example metadata.tsv:</strong></p>
+<p>Checklist ERC000033 ENA virus pathogen reporting standard checklist tax_id scientific_name sample_alias sample_title sample_description collection date geographic location (country and/or sea) host common name host subject id host health state host sex host scientific name collector name collecting institution isolate common name</p>
+</section>
+<section id="summarized-steps-for-success" class="level2">
+<h2 class="anchored" data-anchor-id="summarized-steps-for-success">Summarized Steps for Success</h2>
+<ul>
+<li>Establish FTP connection with ENA.</li>
+<li>Upload the fastq files (Drag’n’Drop)</li>
+<li>Login to Webin Submission Portal</li>
+<li>Upload manifest.tsv through “Submit Reads”</li>
+<li>Upload metadata.tsv through “Register Samples”</li>
+<li>Win</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->
