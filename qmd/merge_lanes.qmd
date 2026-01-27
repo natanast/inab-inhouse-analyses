@@ -38,6 +38,9 @@ execute:
 
     ``` bash
     wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/merge-lanes/mergeLanes.sh
+    ```
+    
+    ```bash
     wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/merge-lanes/runMERGELANES.sh
     ```
 

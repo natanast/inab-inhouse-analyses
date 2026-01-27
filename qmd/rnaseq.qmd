@@ -38,8 +38,12 @@ execute:
 
     ``` bash
     wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/star.sh
+    ```
+    
+    ``` bash
     wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/runSTAR.sh 
     ```
+
 
 7.  Create a SampleList (you have to update with the right path to your fastq files), for example:
 
