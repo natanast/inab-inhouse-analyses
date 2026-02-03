@@ -48,7 +48,9 @@ The peptides file is a 3 – column table containing the following information:
 | HLA-A\*03:01 | AIAVPANVY  | Sample2 |
 | HLA-C\*07:01 | QSYSPPFSF  | Sample3 |
 
-### Steps
+## Steps
+
+### Creating ERGO-II input files
 
 1.  Open RStudio
 
@@ -65,14 +67,14 @@ The peptides file is a 3 – column table containing the following information:
 6.  Run the script
 
 7.  When complete a folder will be created with the following structure:
-    
-    ```bash
+
+    ``` bash
     my_output_folder/
     ├─ ergo-ii-input_sample1.csv
     ├─ ergo-ii-input_sample2.csv
     ├─ ...
     ```
-    
+
 ### Steps to run ERGO:
 
 1.  Log in to the appropriate server:
@@ -109,7 +111,7 @@ The peptides file is a 3 – column table containing the following information:
     cd ERGO-helpers/ERGO-II
     ```
 
-7.  Move to the your new analysis directory:
+7.  Create a folder named data:
 
     ``` bash
     mkdir data
