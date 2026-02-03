@@ -20,33 +20,22 @@ Follow instructions here: [RStudio Desktop - Posit](https://posit.co/download/rs
 
 Your data should be organized with the following format:
 
+``` bash
 my_data/
-
 ├─ Group1/
-
 │  ├─ Clonotypes/
-
 │  │  ├─ Clonotypes_sample1.txt
-
 │  │  ├─ Clonotypes_sample2.txt
-
 │  │  ├─ ...
-
 │  ├─ peptides.xlsx
-
 ├─ Group2/
-
 │  ├─ Clonotypes/
-
 │  │  ├─ ...
-
 │  ├─ peptides.xlsx
-
 ├─ .../
-
 │  ├─ .../
-
 │  ├─ ...
+```
 
 #### Peptides file
 
@@ -76,15 +65,14 @@ The peptides file is a 3 – column table containing the following information:
 6.  Run the script
 
 7.  When complete a folder will be created with the following structure:
-
+    
+    ```bash
     my_output_folder/
-
     ├─ ergo-ii-input_sample1.csv
-
     ├─ ergo-ii-input_sample2.csv
-
     ├─ ...
-
+    ```
+    
 ### Steps to run ERGO:
 
 1.  Log in to the appropriate server:
@@ -155,7 +143,7 @@ The peptides file is a 3 – column table containing the following information:
     bash runERGO-II.sh > run.sh
     ```
 
-    ``` bash         
+    ``` bash
     nohup bash run.sh &
     ```
 
