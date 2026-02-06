@@ -1,12 +1,10 @@
 ---
-title: "ERGO-ii analysis"
+title: "How to run ERGO-ii anlaysis in the computational infrastructure of INAB"
 execute:
   echo: false
 ---
 
-## How to run **ERGO-ii anlaysis** in the computational infrastructure of INAB
-
-### Prerequisites
+## Prerequisites
 
 #### Install R
 
@@ -48,119 +46,125 @@ The peptides file is a 3 – column table containing the following information:
 | HLA-A\*03:01 | AIAVPANVY  | Sample2 |
 | HLA-C\*07:01 | QSYSPPFSF  | Sample3 |
 
-## Steps
+## Creating ERGO-II input files
 
-### Creating ERGO-II input files
+### 1. Open RStudio
 
-1.  Open RStudio
+### 2. Set up your working directory 
 
-2.  Set up your working directory – find the folder where your data are located and choose “Set as Working Directory”
+Find the folder where your data are located and choose “Set as Working Directory”
 
 ![](images/clipboard-1698585898.png){width="446"}
 
-3.  Download the necessary R scripts from here: [ERGO-helpers/R at main · BiodataAnalysisGroup/ERGO-helpers](https://github.com/BiodataAnalysisGroup/ERGO-helpers/tree/main/R) and place them into your working directory.
+### 3. Download the necessary R scripts
 
-4.  Open the **01.build_ergo_inputs.R** and update it with the right path of the data to run first (lines 14 + 15, remove the others if necessary).
+Find them here: [ERGO-helpers/R at main · BiodataAnalysisGroup/ERGO-helpers](https://github.com/BiodataAnalysisGroup/ERGO-helpers/tree/main/R) and place them into your working directory.
 
-5.  Provide an output folder name of preference (line 17)
+### 4. Open the **01.build_ergo_inputs.R** 
 
-6.  Run the script
+Update it with the right path of the data to run first (lines 14 + 15, remove the others if necessary).
 
-7.  When complete a folder will be created with the following structure:
+### 5. Provide an output folder name of preference (line 17)
 
-    ``` bash
-    my_output_folder/
-    ├─ ergo-ii-input_sample1.csv
-    ├─ ergo-ii-input_sample2.csv
-    ├─ ...
-    ```
+### 6. Run the script
 
-### Steps to run ERGO:
+### 7. When complete a folder will be created with the following structure:
 
-1.  Log in to the appropriate server:
+``` bash
+my_output_folder/
+├─ ergo-ii-input_sample1.csv
+├─ ergo-ii-input_sample2.csv
+├─ ...
+```
 
-    o 160.40.71.4
+## Steps to run ERGO:
 
-2.  Move to the your working directory:
+### 1. Log in to the appropriate server:
 
-    ``` bash
-    cd /work/folder_of_each_user
-    ```
+o 160.40.71.4
 
-3.  Create a new analysis directory:
+### 2. Move to the your working directory:
 
-    ``` bash
-    mkdir ergo-ii_2026-01-07
-    ```
+``` bash
+cd /work/folder_of_each_user
+```
 
-4.  Move to the your new analysis directory:
+### 3. Create a new analysis directory:
 
-    ``` bash
-    cd /work/ergo-ii_2026-01-07
-    ```
+``` bash
+mkdir ergo-ii_2026-01-07
+```
 
-5.  Download script to your analysis directory
+### 4. Move to the your new analysis directory:
 
-    ``` bash
-    git clone https://github.com/BiodataAnalysisGroup/ERGO-helpers.git
-    ```
+``` bash
+cd /work/ergo-ii_2026-01-07
+```
 
-6.  Move to the your new analysis directory:
+### 5. Download script to your analysis directory
 
-    ``` bash
-    cd ERGO-helpers/ERGO-II
-    ```
+``` bash
+git clone https://github.com/BiodataAnalysisGroup/ERGO-helpers.git
+```
 
-7.  Create a folder named data and upload your data there:
+### 6. Move to the your new analysis directory:
 
-    ``` bash
-    mkdir data
-    ```
+``` bash
+cd ERGO-helpers/ERGO-II
+```
 
-8.  Create a sample list:
+### 7. Create a folder named data and upload your data there:
 
-    ``` bash
-    ls -la data/ | awk '{print $9}' | awk -F "_" '{print $2}' | awk -F "." '{print $1}' | sort | uniq > SampleList
-    ```
+``` bash
+mkdir data
+```
 
-9.  Remove samples that should not be analyzed:
+### 8. Create a sample list:
 
-    ``` bash
-    nano SampleList
-    ```
+``` bash
+ls -la data/ | awk '{print $9}' | awk -F "_" '{print $2}' | awk -F "." '{print $1}' | sort | uniq > SampleList
+```
 
-    In order to **edit** the SampleList use the following:
+### 9. Remove samples that should not be analyzed:
 
-    o `Delete button`: Removes one letter
+``` bash
+nano SampleList
+```
 
-    o `Ctrl + k`: Removes a whole row
+In order to **edit** the SampleList use the following:
 
-    o `Ctrl + o and Enter`: Saves the modified SampleList
+o `Delete button`: Removes one letter
 
-    o `Ctrl + x`: Exits and returns to the terminal
+o `Ctrl + k`: Removes a whole row
 
-10. Run the analysis (you have to **update** with the right path):
+o `Ctrl + o and Enter`: Saves the modified SampleList
 
-    ``` bash
-    bash runERGO-II.sh > run.sh
-    ```
+o `Ctrl + x`: Exits and returns to the terminal
 
-    ``` bash
-    nohup bash run.sh &
-    ```
+### 10. Run the analysis
 
-11. When complete score files will be created inside the folder you have uploaded.
+You have to **update** with the right path
 
-### Filtering ERGO-II results
+``` bash
+bash runERGO-II.sh > run.sh
+```
 
-1.  Go back to your working directory (RStudio).
+``` bash
+nohup bash run.sh &
+```
 
-2.  Set it as your Working Directory (same steps as before).
+### 11. When complete score files will be created inside the folder you have uploaded.
 
-3.  Create a new folder (e.g. ergo-ii_scores) and download the resulted scores files from the server.
+## Filtering ERGO-II results
 
-4.  Open the **02.filter_ergo_scores.R** and update it with the right path of the data to run first (lines 9 + 10, remove the others if necessary).
+### 1. Go back to your working directory (RStudio).
 
-5.  Provide an output folder name of preference (line 12).
+### 2. Set it as your Working Directory (same steps as before).
 
-6.  Run the script.
+### 3. Create a new folder (e.g. ergo-ii_scores) and download the resulted scores files from the server.
+
+### 4. Open the **02.filter_ergo_scores.R** and update it with the right path of the data to run first (lines 9 + 10, remove the others if necessary).
+
+### 5. Provide an output folder name of preference (line 12).
+
+### 6. Run the script.

@@ -1,35 +1,35 @@
 ---
-title: "fastqc analysis"
+title: "How to run **fastqc analysis** in the computational infrastructure of INAB"
 execute:
   echo: false
 ---
 
-## How to run **fastqc** in the computational infrastructure of INAB
+## Steps to run the analysis
 
-### Steps to run fastqc analysis:
+### 1. Log in to the appropriate server:
 
-1.  Log in to the appropriate server:
+o 160.40.71.4
 
-    o 160.40.71.4
+### 2. Identify where your NGS results (.fastq files) are located:
 
-2.  Identify where your NGS results (.fastq files) are located:
+o e.g., /mnt/new_home/stamatopoulos_research/2025_05_21_ERIC_study
 
-    o e.g., /mnt/new_home/stamatopoulos_research/2025_05_21_ERIC_study
+### 3. Move to the precmed working directory:
 
-3.  Move to the precmed working directory:
+``` bash
+cd /work/precmed/varCall/
+```
 
-    ``` bash
-    cd /work/precmed/varCall/
-    ```
+### 4. Create a new analysis directory:
 
-4.  Create a new analysis directory:
+``` bash
+mkdir run-2025-05-22-fastqc
+```
 
-    ``` bash
-    mkdir run-2025-05-22-fastqc
-    ```
+### 5. Run the fastqc:
 
-5.  Run the fastqc (you have to update with the right **path** to your **fastq files**):
+You have to **update** with the right path your **fastq files.**
 
-    ``` bash
-    fastqc /mnt/new_home/stamatopoulos_research/2025_05_21_ERIC_study/*.fastq.gz -o run-2025-05-22-fastqc/
-    ```
+``` bash
+fastqc /mnt/new_home/stamatopoulos_research/2025_05_21_ERIC_study/*.fastq.gz -o run-2025-05-22-fastqc/
+```

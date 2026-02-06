@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ERGO-ii analysis – INAB In-House Analysis</title>
+<title>How to run ERGO-ii anlaysis in the computational infrastructure of INAB – INAB In-House Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -107,7 +107,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -178,6 +178,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../qmd/ergo.html">
  <span class="dropdown-text">ERGO-ii</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../qmd/sars.html">
+ <span class="dropdown-text">SARS-Cov-2</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -191,13 +195,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#creating-ergo-ii-input-files" id="toc-creating-ergo-ii-input-files" class="nav-link" data-scroll-target="#creating-ergo-ii-input-files">Creating ERGO-II input files</a>
+  <ul class="collapse">
+  <li><a href="#open-rstudio" id="toc-open-rstudio" class="nav-link" data-scroll-target="#open-rstudio">1. Open RStudio</a></li>
+  <li><a href="#set-up-your-working-directory" id="toc-set-up-your-working-directory" class="nav-link" data-scroll-target="#set-up-your-working-directory">2. Set up your working directory</a></li>
+  <li><a href="#download-the-necessary-r-scripts" id="toc-download-the-necessary-r-scripts" class="nav-link" data-scroll-target="#download-the-necessary-r-scripts">3. Download the necessary R scripts</a></li>
+  <li><a href="#open-the-01.build_ergo_inputs.r" id="toc-open-the-01.build_ergo_inputs.r" class="nav-link" data-scroll-target="#open-the-01.build_ergo_inputs.r">4. Open the <strong>01.build_ergo_inputs.R</strong></a></li>
+  <li><a href="#provide-an-output-folder-name-of-preference-line-17" id="toc-provide-an-output-folder-name-of-preference-line-17" class="nav-link" data-scroll-target="#provide-an-output-folder-name-of-preference-line-17">5. Provide an output folder name of preference (line 17)</a></li>
+  <li><a href="#run-the-script" id="toc-run-the-script" class="nav-link" data-scroll-target="#run-the-script">6. Run the script</a></li>
+  <li><a href="#when-complete-a-folder-will-be-created-with-the-following-structure" id="toc-when-complete-a-folder-will-be-created-with-the-following-structure" class="nav-link" data-scroll-target="#when-complete-a-folder-will-be-created-with-the-following-structure">7. When complete a folder will be created with the following structure:</a></li>
+  </ul></li>
+  <li><a href="#steps-to-run-ergo" id="toc-steps-to-run-ergo" class="nav-link" data-scroll-target="#steps-to-run-ergo">Steps to run ERGO:</a>
+  <ul class="collapse">
+  <li><a href="#log-in-to-the-appropriate-server" id="toc-log-in-to-the-appropriate-server" class="nav-link" data-scroll-target="#log-in-to-the-appropriate-server">1. Log in to the appropriate server:</a></li>
+  <li><a href="#move-to-the-your-working-directory" id="toc-move-to-the-your-working-directory" class="nav-link" data-scroll-target="#move-to-the-your-working-directory">2. Move to the your working directory:</a></li>
+  <li><a href="#create-a-new-analysis-directory" id="toc-create-a-new-analysis-directory" class="nav-link" data-scroll-target="#create-a-new-analysis-directory">3. Create a new analysis directory:</a></li>
+  <li><a href="#move-to-the-your-new-analysis-directory" id="toc-move-to-the-your-new-analysis-directory" class="nav-link" data-scroll-target="#move-to-the-your-new-analysis-directory">4. Move to the your new analysis directory:</a></li>
+  <li><a href="#download-script-to-your-analysis-directory" id="toc-download-script-to-your-analysis-directory" class="nav-link" data-scroll-target="#download-script-to-your-analysis-directory">5. Download script to your analysis directory</a></li>
+  <li><a href="#move-to-the-your-new-analysis-directory-1" id="toc-move-to-the-your-new-analysis-directory-1" class="nav-link" data-scroll-target="#move-to-the-your-new-analysis-directory-1">6. Move to the your new analysis directory:</a></li>
+  <li><a href="#create-a-folder-named-data-and-upload-your-data-there" id="toc-create-a-folder-named-data-and-upload-your-data-there" class="nav-link" data-scroll-target="#create-a-folder-named-data-and-upload-your-data-there">7. Create a folder named data and upload your data there:</a></li>
+  <li><a href="#create-a-sample-list" id="toc-create-a-sample-list" class="nav-link" data-scroll-target="#create-a-sample-list">8. Create a sample list:</a></li>
+  <li><a href="#remove-samples-that-should-not-be-analyzed" id="toc-remove-samples-that-should-not-be-analyzed" class="nav-link" data-scroll-target="#remove-samples-that-should-not-be-analyzed">9. Remove samples that should not be analyzed:</a></li>
+  <li><a href="#run-the-analysis-you-have-to-update-with-the-right-path" id="toc-run-the-analysis-you-have-to-update-with-the-right-path" class="nav-link" data-scroll-target="#run-the-analysis-you-have-to-update-with-the-right-path">10. Run the analysis (you have to <strong>update</strong> with the right path):</a></li>
+  <li><a href="#when-complete-score-files-will-be-created-inside-the-folder-you-have-uploaded." id="toc-when-complete-score-files-will-be-created-inside-the-folder-you-have-uploaded." class="nav-link" data-scroll-target="#when-complete-score-files-will-be-created-inside-the-folder-you-have-uploaded.">11. When complete score files will be created inside the folder you have uploaded.</a></li>
+  </ul></li>
+  <li><a href="#filtering-ergo-ii-results" id="toc-filtering-ergo-ii-results" class="nav-link" data-scroll-target="#filtering-ergo-ii-results">Filtering ERGO-II results</a>
+  <ul class="collapse">
+  <li><a href="#go-back-to-your-working-directory-rstudio." id="toc-go-back-to-your-working-directory-rstudio." class="nav-link" data-scroll-target="#go-back-to-your-working-directory-rstudio.">1. Go back to your working directory (RStudio).</a></li>
+  <li><a href="#set-it-as-your-working-directory-same-steps-as-before." id="toc-set-it-as-your-working-directory-same-steps-as-before." class="nav-link" data-scroll-target="#set-it-as-your-working-directory-same-steps-as-before.">2. Set it as your Working Directory (same steps as before).</a></li>
+  <li><a href="#create-a-new-folder-e.g.-ergo-ii_scores-and-download-the-resulted-scores-files-from-the-server." id="toc-create-a-new-folder-e.g.-ergo-ii_scores-and-download-the-resulted-scores-files-from-the-server." class="nav-link" data-scroll-target="#create-a-new-folder-e.g.-ergo-ii_scores-and-download-the-resulted-scores-files-from-the-server.">3. Create a new folder (e.g.&nbsp;ergo-ii_scores) and download the resulted scores files from the server.</a></li>
+  <li><a href="#open-the-02.filter_ergo_scores.r-and-update-it-with-the-right-path-of-the-data-to-run-first-lines-9-10-remove-the-others-if-necessary." id="toc-open-the-02.filter_ergo_scores.r-and-update-it-with-the-right-path-of-the-data-to-run-first-lines-9-10-remove-the-others-if-necessary." class="nav-link" data-scroll-target="#open-the-02.filter_ergo_scores.r-and-update-it-with-the-right-path-of-the-data-to-run-first-lines-9-10-remove-the-others-if-necessary.">4. Open the <strong>02.filter_ergo_scores.R</strong> and update it with the right path of the data to run first (lines 9 + 10, remove the others if necessary).</a></li>
+  <li><a href="#provide-an-output-folder-name-of-preference-line-12." id="toc-provide-an-output-folder-name-of-preference-line-12." class="nav-link" data-scroll-target="#provide-an-output-folder-name-of-preference-line-12.">5. Provide an output folder name of preference (line 12).</a></li>
+  <li><a href="#run-the-script." id="toc-run-the-script." class="nav-link" data-scroll-target="#run-the-script.">6. Run the script.</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ERGO-ii analysis</h1>
+<h1 class="title">How to run ERGO-ii anlaysis in the computational infrastructure of INAB</h1>
 </div>
 
 
@@ -214,10 +259,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="how-to-run-ergo-ii-anlaysis-in-the-computational-infrastructure-of-inab" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-run-ergo-ii-anlaysis-in-the-computational-infrastructure-of-inab">How to run <strong>ERGO-ii anlaysis</strong> in the computational infrastructure of INAB</h2>
-<section id="prerequisites" class="level3">
-<h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
+<section id="prerequisites" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
 <section id="install-r" class="level4">
 <h4 class="anchored" data-anchor-id="install-r">Install R</h4>
 <p>Follow instructions here: <a href="https://cloud.r-project.org/">The Comprehensive R Archive Network</a>. If you cannot download R on your local machine please contact <a href="mailto:inab-support@certh.gr">inab-support@certh.gr</a>.</p>
@@ -281,70 +324,109 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </section>
 </section>
+<section id="creating-ergo-ii-input-files" class="level2">
+<h2 class="anchored" data-anchor-id="creating-ergo-ii-input-files">Creating ERGO-II input files</h2>
+<section id="open-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="open-rstudio">1. Open RStudio</h3>
 </section>
-<section id="steps" class="level2">
-<h2 class="anchored" data-anchor-id="steps">Steps</h2>
-<section id="creating-ergo-ii-input-files" class="level3">
-<h3 class="anchored" data-anchor-id="creating-ergo-ii-input-files">Creating ERGO-II input files</h3>
-<ol type="1">
-<li><p>Open RStudio</p></li>
-<li><p>Set up your working directory – find the folder where your data are located and choose “Set as Working Directory”</p></li>
-</ol>
+<section id="set-up-your-working-directory" class="level3">
+<h3 class="anchored" data-anchor-id="set-up-your-working-directory">2. Set up your working directory</h3>
+<p>Find the folder where your data are located and choose “Set as Working Directory”</p>
 <p><img src="images/clipboard-1698585898.png" class="img-fluid" width="446"></p>
-<ol start="3" type="1">
-<li><p>Download the necessary R scripts from here: <a href="https://github.com/BiodataAnalysisGroup/ERGO-helpers/tree/main/R">ERGO-helpers/R at main · BiodataAnalysisGroup/ERGO-helpers</a> and place them into your working directory.</p></li>
-<li><p>Open the <strong>01.build_ergo_inputs.R</strong> and update it with the right path of the data to run first (lines 14 + 15, remove the others if necessary).</p></li>
-<li><p>Provide an output folder name of preference (line 17)</p></li>
-<li><p>Run the script</p></li>
-<li><p>When complete a folder will be created with the following structure:</p>
+</section>
+<section id="download-the-necessary-r-scripts" class="level3">
+<h3 class="anchored" data-anchor-id="download-the-necessary-r-scripts">3. Download the necessary R scripts</h3>
+<p>Find them here: <a href="https://github.com/BiodataAnalysisGroup/ERGO-helpers/tree/main/R">ERGO-helpers/R at main · BiodataAnalysisGroup/ERGO-helpers</a> and place them into your working directory.</p>
+</section>
+<section id="open-the-01.build_ergo_inputs.r" class="level3">
+<h3 class="anchored" data-anchor-id="open-the-01.build_ergo_inputs.r">4. Open the <strong>01.build_ergo_inputs.R</strong></h3>
+<p>Update it with the right path of the data to run first (lines 14 + 15, remove the others if necessary).</p>
+</section>
+<section id="provide-an-output-folder-name-of-preference-line-17" class="level3">
+<h3 class="anchored" data-anchor-id="provide-an-output-folder-name-of-preference-line-17">5. Provide an output folder name of preference (line 17)</h3>
+</section>
+<section id="run-the-script" class="level3">
+<h3 class="anchored" data-anchor-id="run-the-script">6. Run the script</h3>
+</section>
+<section id="when-complete-a-folder-will-be-created-with-the-following-structure" class="level3">
+<h3 class="anchored" data-anchor-id="when-complete-a-folder-will-be-created-with-the-following-structure">7. When complete a folder will be created with the following structure:</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_output_folder/</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├─</span> ergo-ii-input_sample1.csv</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├─</span> ergo-ii-input_sample2.csv</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├─</span> ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ol>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├─</span> ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="steps-to-run-ergo" class="level3">
-<h3 class="anchored" data-anchor-id="steps-to-run-ergo">Steps to run ERGO:</h3>
-<ol type="1">
-<li><p>Log in to the appropriate server:</p>
-<p>o 160.40.71.4</p></li>
-<li><p>Move to the your working directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /work/folder_of_each_user</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Create a new analysis directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ergo-ii_2026-01-07</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Move to the your new analysis directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /work/ergo-ii_2026-01-07</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Download script to your analysis directory</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/BiodataAnalysisGroup/ERGO-helpers.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Move to the your new analysis directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ERGO-helpers/ERGO-II</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Create a folder named data and upload your data there:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Create a sample list:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> data/ <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $9}'</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-F</span> <span class="st">"_"</span> <span class="st">'{print $2}'</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-F</span> <span class="st">"."</span> <span class="st">'{print $1}'</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="op">&gt;</span> SampleList</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Remove samples that should not be analyzed:</p>
+</section>
+<section id="steps-to-run-ergo" class="level2">
+<h2 class="anchored" data-anchor-id="steps-to-run-ergo">Steps to run ERGO:</h2>
+<section id="log-in-to-the-appropriate-server" class="level3">
+<h3 class="anchored" data-anchor-id="log-in-to-the-appropriate-server">1. Log in to the appropriate server:</h3>
+<p>o 160.40.71.4</p>
+</section>
+<section id="move-to-the-your-working-directory" class="level3">
+<h3 class="anchored" data-anchor-id="move-to-the-your-working-directory">2. Move to the your working directory:</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /work/folder_of_each_user</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="create-a-new-analysis-directory" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-new-analysis-directory">3. Create a new analysis directory:</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ergo-ii_2026-01-07</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="move-to-the-your-new-analysis-directory" class="level3">
+<h3 class="anchored" data-anchor-id="move-to-the-your-new-analysis-directory">4. Move to the your new analysis directory:</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /work/ergo-ii_2026-01-07</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="download-script-to-your-analysis-directory" class="level3">
+<h3 class="anchored" data-anchor-id="download-script-to-your-analysis-directory">5. Download script to your analysis directory</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/BiodataAnalysisGroup/ERGO-helpers.git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="move-to-the-your-new-analysis-directory-1" class="level3">
+<h3 class="anchored" data-anchor-id="move-to-the-your-new-analysis-directory-1">6. Move to the your new analysis directory:</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ERGO-helpers/ERGO-II</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="create-a-folder-named-data-and-upload-your-data-there" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-folder-named-data-and-upload-your-data-there">7. Create a folder named data and upload your data there:</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="create-a-sample-list" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-sample-list">8. Create a sample list:</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> data/ <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $9}'</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-F</span> <span class="st">"_"</span> <span class="st">'{print $2}'</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-F</span> <span class="st">"."</span> <span class="st">'{print $1}'</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> <span class="op">&gt;</span> SampleList</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="remove-samples-that-should-not-be-analyzed" class="level3">
+<h3 class="anchored" data-anchor-id="remove-samples-that-should-not-be-analyzed">9. Remove samples that should not be analyzed:</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> SampleList</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>In order to <strong>edit</strong> the SampleList use the following:</p>
 <p>o <code>Delete button</code>: Removes one letter</p>
 <p>o <code>Ctrl + k</code>: Removes a whole row</p>
 <p>o <code>Ctrl + o and Enter</code>: Saves the modified SampleList</p>
-<p>o <code>Ctrl + x</code>: Exits and returns to the terminal</p></li>
-<li><p>Run the analysis (you have to <strong>update</strong> with the right path):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> runERGO-II.sh <span class="op">&gt;</span> run.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nohup</span> bash run.sh <span class="kw">&amp;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>When complete score files will be created inside the folder you have uploaded.</p></li>
-</ol>
+<p>o <code>Ctrl + x</code>: Exits and returns to the terminal</p>
 </section>
-<section id="filtering-ergo-ii-results" class="level3">
-<h3 class="anchored" data-anchor-id="filtering-ergo-ii-results">Filtering ERGO-II results</h3>
-<ol type="1">
-<li><p>Go back to your working directory (RStudio).</p></li>
-<li><p>Set it as your Working Directory (same steps as before).</p></li>
-<li><p>Create a new folder (e.g.&nbsp;ergo-ii_scores) and download the resulted scores files from the server.</p></li>
-<li><p>Open the <strong>02.filter_ergo_scores.R</strong> and update it with the right path of the data to run first (lines 9 + 10, remove the others if necessary).</p></li>
-<li><p>Provide an output folder name of preference (line 12).</p></li>
-<li><p>Run the script.</p></li>
-</ol>
+<section id="run-the-analysis-you-have-to-update-with-the-right-path" class="level3">
+<h3 class="anchored" data-anchor-id="run-the-analysis-you-have-to-update-with-the-right-path">10. Run the analysis (you have to <strong>update</strong> with the right path):</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> runERGO-II.sh <span class="op">&gt;</span> run.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nohup</span> bash run.sh <span class="kw">&amp;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="when-complete-score-files-will-be-created-inside-the-folder-you-have-uploaded." class="level3">
+<h3 class="anchored" data-anchor-id="when-complete-score-files-will-be-created-inside-the-folder-you-have-uploaded.">11. When complete score files will be created inside the folder you have uploaded.</h3>
+</section>
+</section>
+<section id="filtering-ergo-ii-results" class="level2">
+<h2 class="anchored" data-anchor-id="filtering-ergo-ii-results">Filtering ERGO-II results</h2>
+<section id="go-back-to-your-working-directory-rstudio." class="level3">
+<h3 class="anchored" data-anchor-id="go-back-to-your-working-directory-rstudio.">1. Go back to your working directory (RStudio).</h3>
+</section>
+<section id="set-it-as-your-working-directory-same-steps-as-before." class="level3">
+<h3 class="anchored" data-anchor-id="set-it-as-your-working-directory-same-steps-as-before.">2. Set it as your Working Directory (same steps as before).</h3>
+</section>
+<section id="create-a-new-folder-e.g.-ergo-ii_scores-and-download-the-resulted-scores-files-from-the-server." class="level3">
+<h3 class="anchored" data-anchor-id="create-a-new-folder-e.g.-ergo-ii_scores-and-download-the-resulted-scores-files-from-the-server.">3. Create a new folder (e.g.&nbsp;ergo-ii_scores) and download the resulted scores files from the server.</h3>
+</section>
+<section id="open-the-02.filter_ergo_scores.r-and-update-it-with-the-right-path-of-the-data-to-run-first-lines-9-10-remove-the-others-if-necessary." class="level3">
+<h3 class="anchored" data-anchor-id="open-the-02.filter_ergo_scores.r-and-update-it-with-the-right-path-of-the-data-to-run-first-lines-9-10-remove-the-others-if-necessary.">4. Open the <strong>02.filter_ergo_scores.R</strong> and update it with the right path of the data to run first (lines 9 + 10, remove the others if necessary).</h3>
+</section>
+<section id="provide-an-output-folder-name-of-preference-line-12." class="level3">
+<h3 class="anchored" data-anchor-id="provide-an-output-folder-name-of-preference-line-12.">5. Provide an output folder name of preference (line 12).</h3>
+</section>
+<section id="run-the-script." class="level3">
+<h3 class="anchored" data-anchor-id="run-the-script.">6. Run the script.</h3>
 
 
 </section>
