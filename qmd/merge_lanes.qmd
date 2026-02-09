@@ -1,88 +1,92 @@
 ---
-title: "Merge lanes"
+title: "How to run merge lanes in the computational infrastructure of INAB"
 execute:
   echo: false
 ---
 
-## How to run **merge lanes** in the computational infrastructure of INAB
+## Steps to run the analysis
 
-### Steps to run merge lanes:
+### 1. Log in to the appropriate server:
 
-1.  Log in to the appropriate server:
+o 160.40.71.4
 
-    o 160.40.71.4
+### 2. Identify where your NGS results (.fastq files) are located:
 
-2.  Identify where your NGS results (.fastq files) are located:
+o e.g., /mnt/new_home/stamatopoulos_research/date_study
 
-    o e.g., /mnt/new_home/stamatopoulos_research/date_study
+### 3. Move to the your working directory:
 
-3.  Move to the your working directory:
+``` bash
+cd /work/folder_of_each_user
+```
 
-    ``` bash
-    cd /work/folder_of_each_user
-    ```
+### 4. Create a new analysis directory:
 
-4.  Create a new analysis directory:
+``` bash
+mkdir mergeLanes_2025_05_21
+```
 
-    ``` bash
-    mkdir mergeLanes_2025_05_21
-    ```
+### 5. Move to the your new analysis directory:
 
-5.  Move to the your new analysis directory:
+``` bash
+cd /work/mergeLanes_2025_05_21
+```
 
-    ``` bash
-    cd /work/mergeLanes_2025_05_21
-    ```
+### 6. Download script to your analysis directory:
 
-6.  Download script to your analysis directory
+``` bash
+wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/merge-lanes/mergeLanes.sh
+```
 
-    ``` bash
-    wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/merge-lanes/mergeLanes.sh
-    ```
-    
-    ```bash
-    wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/merge-lanes/runMERGELANES.sh
-    ```
+``` bash
+wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/merge-lanes/runMERGELANES.sh
+```
 
-7.  Create a SampleList (you have to update with the right path to your fastq files), for example:
+### 7. Create a SampleList:
 
-    ``` bash
-    ls -la /mnt/new_home/stamatopoulos_research/date_study | awk '{print $9}' | awk -F "_L" '{print $1}' | sort | uniq > SampleList
-    ```
+You have to **update** with the right path to your **fastq** **files.**
 
-8.  Remove samples that should not be analyzed:
+``` bash
+ls -la /mnt/new_home/stamatopoulos_research/date_study | awk '{print $9}' | awk -F "_L" '{print $1}' | sort | uniq > SampleList
+```
 
-    ``` bash
-    nano SampleList
-    ```
+### 8. Remove samples that should not be analyzed:
 
-    In order to **edit** the SampleList use the following:
+``` bash
+nano SampleList
+```
 
-    o `Delete button`: Removes one letter
+In order to **edit** the SampleList use the following:
 
-    o `Ctrl + k`: Removes a whole row
+o `Delete button`: Removes one letter
 
-    o `Ctrl + o and Enter`: Saves the modified SampleList
+o `Ctrl + k`: Removes a whole row
 
-    o `Ctrl + x`: Exits and returns to the terminal
+o `Ctrl + o and Enter`: Saves the modified SampleList
 
-9.  Run the analysis (you have to **update** with the right path):
+o `Ctrl + x`: Exits and returns to the terminal
 
-    ``` bash
-    nohup bash runMERGELANES.sh \
-    /mnt/new_home/stamatopoulos_research/date_study \
-    SampleList \    
-    &
-    ```
+### 9. Run the analysis:
 
-10. After the analysis is completed, move **your folder** from /work to /mnt/new_home
+You have to **update** with the right path.
 
-    ``` bash
-    cd ..
-    ```
-    
-    ```bash
-    rsync -r \
-    mergeLanes_2025_05_21 \
-    /mnt/new_home/stamatopoulos_research
-    ```
+``` bash
+nohup bash runMERGELANES.sh \
+/mnt/new_home/stamatopoulos_research/date_study \
+SampleList \    
+&
+```
+
+### 10. After the analysis is completed:
+
+Move your folder from **/work** to **/mnt/new_home**.
+
+``` bash
+cd ..
+```
+
+``` bash
+rsync -r \
+mergeLanes_2025_05_21 \
+/mnt/new_home/stamatopoulos_research
+```

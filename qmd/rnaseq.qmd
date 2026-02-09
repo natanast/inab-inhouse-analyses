@@ -1,92 +1,95 @@
 ---
-title: "RNAseq analysis"
+title: "How to run **RNAseq analysis** in the computational infrastructure of INAB"
 execute:
   echo: false
 ---
 
-## How to run **RNAseq analysis** in the computational infrastructure of INAB
+## Steps to run the analysis:
 
-### Steps to run RNAseq analysis:
+### 1. Log in to the appropriate server:
 
-1.  Log in to the appropriate server:
+o 160.40.71.4
 
-    o 160.40.71.4
+### 2. Identify where your NGS results (.fastq files) are located:
 
-2.  Identify where your NGS results (.fastq files) are located:
+o e.g., /mnt/new_home/stamatopoulos_research/2025_05_21_ERIC_study
 
-    o e.g., /mnt/new_home/stamatopoulos_research/2025_05_21_ERIC_study
+### 3. Move to the your working directory:
 
-3.  Move to the your working directory:
+``` bash
+cd /work/folder_of_each_user
+```
 
-    ``` bash
-    cd /work/folder_of_each_user
-    ```
+### 4. Create a new analysis directory:
 
-4.  Create a new analysis directory:
+``` bash
+mkdir RNAseq_analysis_2025_05_21
+```
 
-    ``` bash
-    mkdir RNAseq_analysis_2025_05_21
-    ```
+### 5. Move to the your new analysis directory:
 
-5.  Move to the your new analysis directory:
+``` bash
+cd /work/RNAseq_analysis_2025_05_21
+```
 
-    ``` bash
-    cd /work/RNAseq_analysis_2025_05_21
-    ```
+### 6. Download script to your analysis directory
 
-6.  Download script to your analysis directory
+``` bash
+wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/star.sh
+```
 
-    ``` bash
-    wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/star.sh
-    ```
-    
-    ``` bash
-    wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/runSTAR.sh 
-    ```
+``` bash
+wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/runSTAR.sh 
+```
 
+### 7. Create a SampleList 
 
-7.  Create a SampleList (you have to update with the right path to your fastq files), for example:
+You have to **update** with the right path to your **fastq files**.
 
-    ``` bash
-    ls -la /mnt/new_home/stamatopoulos_research/RNAseq_2025_05_21 | awk '{print $9}' | awk -F "_R" '{print $1}' | sort | uniq > SampleList
-    ```
+``` bash
+ls -la /mnt/new_home/stamatopoulos_research/RNAseq_2025_05_21 | awk '{print $9}' | awk -F "_R" '{print $1}' | sort | uniq > SampleList
+```
 
-8.  Remove samples that should not be analyzed:
+### 8. Remove samples that should not be analyzed:
 
-    ``` bash
-    nano SampleList
-    ```
+``` bash
+nano SampleList
+```
 
-    In order to **edit** the SampleList use the following:
+In order to **edit** the SampleList use the following:
 
-    o `Delete button`: Removes one letter
+o `Delete button`: Removes one letter
 
-    o `Ctrl + k`: Removes a whole row
+o `Ctrl + k`: Removes a whole row
 
-    o `Ctrl + o and Enter`: Saves the modified SampleList
+o `Ctrl + o and Enter`: Saves the modified SampleList
 
-    o `Ctrl + x`: Exits and returns to the terminal
+o `Ctrl + x`: Exits and returns to the terminal
 
-9.  Run the analysis (you have to **update** with the right path):
+### 9. Run the analysis:
 
-    ``` bash
-    nohup bash runSTAR.sh \
-    /mnt/new_home/stamatopoulos_research/RNAseq_2025_05_21 \
-    SampleList \
-    /mnt/new_home/bio_tmp/HSapRefData/hg38/gencode/star \
-    /mnt/new_home/bio_tmp/HSapRefData/hg38/gencode/gencode.v47.primary_assembly.basic.annotation.gtf \
-    16 \
-    &
-    ```
+You have to **update** with the right path.
 
-10. After the analysis is completed, move **your folder** from /work to /mnt/new_home
+``` bash
+nohup bash runSTAR.sh \
+/mnt/new_home/stamatopoulos_research/RNAseq_2025_05_21 \
+SampleList \
+/mnt/new_home/bio_tmp/HSapRefData/hg38/gencode/star \
+/mnt/new_home/bio_tmp/HSapRefData/hg38/gencode/gencode.v47.primary_assembly.basic.annotation.gtf \
+16 \
+&
+```
 
-    ``` bash
-    cd ..
-    ```
-    
-    ```bash
-    rsync -r \
-    RNAseq_analysis_2025_05_21 \
-    /mnt/new_home/stamatopoulos_research
-    ```
+### 10. After the analysis is completed
+
+Move your folder from **/work** to **/mnt/new_home**
+
+``` bash
+cd ..
+```
+
+``` bash
+rsync -r \
+RNAseq_analysis_2025_05_21 \
+/mnt/new_home/stamatopoulos_research
+```
