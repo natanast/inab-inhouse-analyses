@@ -1,5 +1,5 @@
 ---
-title: "How to run SARS-Cov-2 analysis in the computational infrastructure of INAB"
+title: "How to run **SARS-Cov-2 analysis** in the computational infrastructure of INAB"
 execute:
   echo: false
 ---

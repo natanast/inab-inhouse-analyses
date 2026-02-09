@@ -1,5 +1,5 @@
 ---
-title: "How to run ERGO-ii anlaysis in the computational infrastructure of INAB"
+title: "How to run **ERGO-ii anlaysis** in the computational infrastructure of INAB"
 execute:
   echo: false
 ---

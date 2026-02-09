@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>BCL Convert – INAB In-House Analysis</title>
+<title>How to run BCL Convert in the computational infrastructure of INAB – INAB In-House Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -200,9 +200,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#how-to-run-bcl-convert-in-the-computational-infrastructure-of-inab" id="toc-how-to-run-bcl-convert-in-the-computational-infrastructure-of-inab" class="nav-link active" data-scroll-target="#how-to-run-bcl-convert-in-the-computational-infrastructure-of-inab">How to run <strong>BCL Convert</strong> in the computational infrastructure of INAB</a>
+  <li><a href="#steps-to-run-the-analysis" id="toc-steps-to-run-the-analysis" class="nav-link active" data-scroll-target="#steps-to-run-the-analysis">Steps to run the analysis:</a>
   <ul class="collapse">
-  <li><a href="#steps-to-run-bcl-convert-analysis" id="toc-steps-to-run-bcl-convert-analysis" class="nav-link" data-scroll-target="#steps-to-run-bcl-convert-analysis">Steps to run BCL Convert analysis:</a></li>
+  <li><a href="#log-in-to-the-appropriate-server" id="toc-log-in-to-the-appropriate-server" class="nav-link" data-scroll-target="#log-in-to-the-appropriate-server">1. Log in to the appropriate server:</a></li>
+  <li><a href="#identify-where-your-ngs-results-.bcl-files-and-samplesheet-are-located" id="toc-identify-where-your-ngs-results-.bcl-files-and-samplesheet-are-located" class="nav-link" data-scroll-target="#identify-where-your-ngs-results-.bcl-files-and-samplesheet-are-located">2. Identify where your NGS results (.bcl files and SampleSheet) are located:</a></li>
+  <li><a href="#create-your-samplesheet.csv" id="toc-create-your-samplesheet.csv" class="nav-link" data-scroll-target="#create-your-samplesheet.csv">3. Create your SampleSheet.csv:</a></li>
+  <li><a href="#move-to-your-working-folder" id="toc-move-to-your-working-folder" class="nav-link" data-scroll-target="#move-to-your-working-folder">4. Move to your working folder:</a></li>
+  <li><a href="#upload-your-samplesheet.csv-to-your-working-folder" id="toc-upload-your-samplesheet.csv-to-your-working-folder" class="nav-link" data-scroll-target="#upload-your-samplesheet.csv-to-your-working-folder">5. Upload your SampleSheet.csv to your working folder:</a></li>
+  <li><a href="#define-a-distinctive-name-for-your-folder" id="toc-define-a-distinctive-name-for-your-folder" class="nav-link" data-scroll-target="#define-a-distinctive-name-for-your-folder">6. Define a distinctive name for your folder</a></li>
+  <li><a href="#run-the-analysis" id="toc-run-the-analysis" class="nav-link" data-scroll-target="#run-the-analysis">7. Run the analysis:</a></li>
+  <li><a href="#after-the-analysis-is-completed" id="toc-after-the-analysis-is-completed" class="nav-link" data-scroll-target="#after-the-analysis-is-completed">8. After the analysis is completed</a></li>
+  <li><a href="#files-older-than-2-weeks-will-be-automatically-deleted-from-shared-folders" id="toc-files-older-than-2-weeks-will-be-automatically-deleted-from-shared-folders" class="nav-link" data-scroll-target="#files-older-than-2-weeks-will-be-automatically-deleted-from-shared-folders">9. Files older than <strong>2 weeks</strong> will be automatically <strong>deleted</strong> from shared folders!</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -212,7 +220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">BCL Convert</h1>
+<h1 class="title">How to run <strong>BCL Convert</strong> in the computational infrastructure of INAB</h1>
 </div>
 
 
@@ -229,42 +237,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="how-to-run-bcl-convert-in-the-computational-infrastructure-of-inab" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-run-bcl-convert-in-the-computational-infrastructure-of-inab">How to run <strong>BCL Convert</strong> in the computational infrastructure of INAB</h2>
-<section id="steps-to-run-bcl-convert-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="steps-to-run-bcl-convert-analysis">Steps to run BCL Convert analysis:</h3>
-<ol type="1">
-<li><p>Log in to the appropriate server:</p>
-<p>o 160.40.71.4</p></li>
-<li><p>Identify where your NGS results (.bcl files and SampleSheet) are located:</p>
-<p>o e.g., /mnt/new_home/illumina/nextseq2000/240412_VH00795_60_AAFLFTVM5</p></li>
-<li><p>Create your SampleSheet.csv:</p>
+<section id="steps-to-run-the-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="steps-to-run-the-analysis">Steps to run the analysis:</h2>
+<section id="log-in-to-the-appropriate-server" class="level3">
+<h3 class="anchored" data-anchor-id="log-in-to-the-appropriate-server">1. Log in to the appropriate server:</h3>
+<p>o 160.40.71.4</p>
+</section>
+<section id="identify-where-your-ngs-results-.bcl-files-and-samplesheet-are-located" class="level3">
+<h3 class="anchored" data-anchor-id="identify-where-your-ngs-results-.bcl-files-and-samplesheet-are-located">2. Identify where your NGS results (.bcl files and SampleSheet) are located:</h3>
+<p>o e.g., /mnt/new_home/illumina/nextseq2000/240412_VH00795_60_AAFLFTVM5</p>
+</section>
+<section id="create-your-samplesheet.csv" class="level3">
+<h3 class="anchored" data-anchor-id="create-your-samplesheet.csv">3. Create your SampleSheet.csv:</h3>
 <p>o Generally, a SampleSheet must include two sections: (1) the Settings Section and (2) the Data Section</p>
-<p>o In the Data Section you can add a column named <strong>Sample_Project</strong> containing the name of the respective project for each sample. Sample_Project Optional can only contain alphanumeric characters, dashes, and underscores. Duplicate data strings with different cases (e.g., sampleProject and SampleProject) are <strong>not allowed</strong>. If these are used, <strong>analysis fails</strong>.</p></li>
-<li><p>Move to your working folder:</p>
+<p>o In the Data Section you can add a column named <strong>Sample_Project</strong> containing the name of the respective project for each sample. Sample_Project Optional can only contain alphanumeric characters, dashes, and underscores. Duplicate data strings with different cases (e.g., sampleProject and SampleProject) are <strong>not allowed</strong>. If these are used, <strong>analysis fails</strong>.</p>
+</section>
+<section id="move-to-your-working-folder" class="level3">
+<h3 class="anchored" data-anchor-id="move-to-your-working-folder">4. Move to your working folder:</h3>
 <p>o In case there are <u>only samples from your lab</u> run:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /mnt/new_home/stamatopoulos_research/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>o In case there are <u>samples from multiple labs</u> run:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /mnt/new_home/illumina_common_fastq</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Upload your SampleSheet.csv to your working folder:</p>
-<p>o Any SFTP program (e.g., Bitvise SSH Client) can be used to transfer SampleSheet.csv. Just drag &amp; drop the file from the left to the right window.</p></li>
-<li><p>Define a distinctive name for the folder that will contain the bcl-convert results (e.g., 2025_05_20_ERIC_study) and use it as input after the –output-directory argument (check the command below)</p></li>
-<li><p>Now you can execute bcl-convert (version 00.000.000.3.10.12), based on the following command:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /mnt/new_home/illumina_common_fastq</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="upload-your-samplesheet.csv-to-your-working-folder" class="level3">
+<h3 class="anchored" data-anchor-id="upload-your-samplesheet.csv-to-your-working-folder">5. Upload your SampleSheet.csv to your working folder:</h3>
+<p>o Any SFTP program (e.g., Bitvise SSH Client) can be used to transfer SampleSheet.csv. Just drag &amp; drop the file from the left to the right window.</p>
+</section>
+<section id="define-a-distinctive-name-for-your-folder" class="level3">
+<h3 class="anchored" data-anchor-id="define-a-distinctive-name-for-your-folder">6. Define a distinctive name for your folder</h3>
+<p>o The folder will contain the bcl-convert results (e.g., 2025_05_20_ERIC_study).</p>
+<p>o Use it as input after the –output-directory argument (check the command below)</p>
+</section>
+<section id="run-the-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="run-the-analysis">7. Run the analysis:</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nohup</span> bcl-convert <span class="dt">\</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>--bcl-input-directory /mnt/new_home/illumina/nextseq2000/240412_VH00795_60_AAFLFTVM5 <span class="dt">\</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>--output-directory 2025_05_20_ERIC_study <span class="dt">\</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>--sample-sheet SampleSheet.csv <span class="dt">\</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>--no-lane-splitting true <span class="dt">\</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>--bcl-sampleproject-subdirectories <span class="dt">\</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>-–force <span class="op">&gt;</span> ./2025_05_20_ERIC_study.log <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">&amp;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>After the command for bcl-convert has run successfully, move your SampleSheet.csv to the output folder:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> SampleSheet.csv 2025_05_20_ERIC_study</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p>Files older than <strong>2 weeks</strong> will be automatically <strong>deleted</strong> from shared folders!</p>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>-–force <span class="op">&gt;</span> ./2025_05_20_ERIC_study.log <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">&amp;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="after-the-analysis-is-completed" class="level3">
+<h3 class="anchored" data-anchor-id="after-the-analysis-is-completed">8. After the analysis is completed</h3>
+<p>Move your SampleSheet.csv to the output folder:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> SampleSheet.csv 2025_05_20_ERIC_study</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="files-older-than-2-weeks-will-be-automatically-deleted-from-shared-folders" class="level3">
+<h3 class="anchored" data-anchor-id="files-older-than-2-weeks-will-be-automatically-deleted-from-shared-folders">9. Files older than <strong>2 weeks</strong> will be automatically <strong>deleted</strong> from shared folders!</h3>
 <p>For this reason, if we have run the analysis in a shared folder such as <em>/mnt/new_home/illumina_common_fastq</em>, we should transfer the final files to our <strong>own</strong> subfolder, which will be located under our research group’s folder.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rsync</span> <span class="at">-r</span> <span class="dt">\</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>/mnt/new_home/illumina_common_fastq/2025_05_20_ERIC_study <span class="dt">\</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>/mnt/new_home/stamatopoulos_research</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-</ol>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>/mnt/new_home/stamatopoulos_research</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
