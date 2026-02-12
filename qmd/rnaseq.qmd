@@ -42,7 +42,7 @@ wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/star.s
 wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/runSTAR.sh 
 ```
 
-### 7. Create a SampleList 
+### 7. Create a SampleList
 
 You have to **update** with the right path to your **fastq files**.
 
@@ -71,13 +71,7 @@ o `Ctrl + x`: Exits and returns to the terminal
 You have to **update** with the right path.
 
 ``` bash
-nohup bash runSTAR.sh \
-/mnt/new_home/stamatopoulos_research/RNAseq_2025_05_21 \
-SampleList \
-/mnt/new_home/bio_tmp/HSapRefData/hg38/gencode/star \
-/mnt/new_home/bio_tmp/HSapRefData/hg38/gencode/gencode.v47.primary_assembly.basic.annotation.gtf \
-16 \
-&
+nohup bash runSTAR.sh /mnt/new_home/stamatopoulos_research/RNAseq_2025_05_21 SampleList /mnt/new_home/bio_tmp/HSapRefData/hg38/gencode/star /mnt/new_home/bio_tmp/HSapRefData/hg38/gencode/gencode.v47.primary_assembly.basic.annotation.gtf 16 &
 ```
 
 ### 10. After the analysis is completed
@@ -89,7 +83,5 @@ cd ..
 ```
 
 ``` bash
-rsync -r \
-RNAseq_analysis_2025_05_21 \
-/mnt/new_home/stamatopoulos_research
+rsync -r RNAseq_analysis_2025_05_21 /mnt/new_home/stamatopoulos_research
 ```
