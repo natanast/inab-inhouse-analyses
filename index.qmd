@@ -4,13 +4,15 @@ format: html
 editor: visual
 ---
 
-Welcome to the `INAB In-House Analyses` guide.
+Welcome to the **`INAB In-House Analyses`** guide.
 
 ## Introduction
 
 This page provides internal documentation for performing standard bioinformatics analyses at the lab, including setup, data preprocessing, and downstream workflows.
 
-> **Note:** This document is for internal use only.
+::: callout-important
+## **Note:** This document is for internal use only.
+:::
 
 ## Getting Started
 
@@ -30,15 +32,10 @@ You will learn:
 
 ## Contributing
 
-Your input is invaluable - whether it's suggesting a new chart/analysis or reporting a bug, we welcome and greatly appreciate your feedback! 
+Your input is invaluable - whether it's suggesting a new chart/analysis or reporting a bug, we welcome and greatly appreciate your feedback!
 
-Feel free to open a [GitHub issue](https://github.com/natanast/immunovisual/issues) or contact us via `inab.bioinformatics@lists.certh.gr`.
-
+Feel free to open a [GitHub issue](https://github.com/BiodataAnalysisGroup/inab-inhouse-analyses) or **contact us via `inab.bioinformatics@lists.certh.gr`**.
 
 ## Authors
-
-```{r}
-
-```
 
 `r fontawesome::fa("github", "black")` [Natasa Anastasiadou](https://github.com/natanast) `r fontawesome::fa("github", "black")` [Nikos Pechlivanis](https://github.com/npechl) `r fontawesome::fa("github", "black")` [Sofoklis Keisaris](https://github.com/Sofokli5)

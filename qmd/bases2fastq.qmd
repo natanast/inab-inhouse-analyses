@@ -6,76 +6,82 @@ execute:
 
 ## How to run **bases2fastq** in the computational infrastructure of INAB
 
-### Steps to run bases2fastq analysis:
+### 1. Log in to the appropriate server:
 
-1.  Log in to the appropriate server:
+::: {.callout-note}
+160.40.71.4
+160.40.71.6
+...
+:::
 
-    o 160.40.71.4
+### 2. Identify where your NGS results (.bcl files and SampleSheet) are located:
 
-2.  Identify where your NGS results (.bcl files and SampleSheet) are located:
+::: {.callout-note}
+e.g.,   /mnt/new_home/element/AV240301/20250131_AV240301_SARSDIAGNOSIS
+:::
 
-    o e.g., /mnt/new_home/element/AV240301/20250131_AV240301_SARSDIAGNOSIS
+### 3. Activate conda environment with dependencies for bases2fastq:
 
-3.  Activate conda environment with dependencies for bases2fastq:
+```bash
+conda activate bases2fastq_dependencies
+```
 
-    ``` bash
-    source activate /apps/miniconda3/envs/bases2fastq_dependencies
-    ```
+### 4. Create your `RunManifest.csv`:
 
-4.  Create your RunManifest.csv:
+Information for preparing the RunManifest file can be found [here](https://docs.elembio.io/docs/run-manifest/).
 
-    o Information for preparing the RunManifest file can be found [here](https://docs.elembio.io/docs/run-manifest/).
+::: {.callout-note}
+In the Data Section you can add a column named **Project** containing the name of the respective project for each sample. Project can only contain alphanumeric characters, dashes, and underscores.
+:::
 
-    o You can add a column named Project containing the name of the respective project for each sample.
+### 5. Move to your working folder:
 
-    o In the Data Section you can add a column named **Project** containing the name of the respective project for each sample.
+In case there are [only samples from your lab]{.underline} run:
 
-    Project can only contain alphanumeric characters, dashes, and underscores.
+```bash
+cd /mnt/new_home/stamatopoulos_research/
+```
 
-5.  Move to your working folder:
+In case there are [samples from multiple labs]{.underline} run:
 
-    o In case there are [only samples from your lab]{.underline} run:
+```bash
+cd /mnt/new_home/illumina_common_fastq
+```
 
-    ``` bash
-    cd /mnt/new_home/stamatopoulos_research/
-    ```
+### 6. Upload your `RunManifest.csv` to your working folder.
 
-    o In case there are [samples from multiple labs]{.underline} run:
+Any SFTP program (e.g., Bitvise SSH Client) can be used to transfer `RunManifest.csv`. Just drag & drop the file from the left to the right window.
 
-    ``` bash
-    cd /mnt/new_home/illumina_common_fastq
-    ```
+### 7. Define a distinctive name for the folder that will contain the bases2fastq results and use it as input (see Step 8.)
 
-6.  Upload your RunManifest.csv to your working folder.
+::: {.callout-note}
+e.g., 2025_05_21_ERIC_study
+:::
 
-    o Any SFTP program (e.g., Bitvise SSH Client) can be used to transfer RunManifest.csv. Just drag & drop the file from the left to the right window.
+### 8. Now you can execute bases2fastq (version 2.1.0.1522407762), based on the following command:
 
-7.  Define a distinctive name for the folder that will contain the bases2fastq results (e.g., 2025_05_21_ERIC_study) and use it as input (check the command below)
+```bash
+nohup bases2fastq \
+--num-threads 16 \
+--group-fastq \
+--legacy-fastq \
+--run-manifest RunManifest.csv \
+/mnt/new_home/element/AV240301/20250131_AV240301_SARSDIAGNOSIS/ \
+2025_05_21_ERIC_study/ > ./2025_05_21_ERIC_study.log 2>&1 &
+```
 
-8.  Now you can execute bases2fastq (version 2.1.0.1522407762), based on the following command:
+### 9. After the command for bases2fastq has run successfully, move your `RunManifest.csv` to the output folder:
 
-    ``` bash
-    nohup /apps/element/bases2fastq \
-    --num-threads 16 \
-    --group-fastq \
-    --legacy-fastq \
-    --run-manifest RunManifest.csv \
-    /mnt/new_home/element/AV240301/20250131_AV240301_SARSDIAGNOSIS/ \
-    2025_05_21_ERIC_study/ > ./2025_05_21_ERIC_study.log 2>&1 &
-    ```
+```bash
+mv RunManifest.csv 2025_05_21_ERIC_study
+```
 
-9.  After the command for bases2fastq has run successfully, move your RunManifest.csv to the output folder:
+### 10. **Files older than 2 weeks** will be automatically **deleted** from shared folders!
 
-    ``` bash
-    mv RunManifest.csv 2025_05_21_ERIC_study
-    ```
+For this reason, if we have run the analysis in a shared folder such as */mnt/new_home/element_common_fastq*, we should transfer the final files to our **own** subfolder, which will be located under our research group's folder.
 
-10. Files older than **2 weeks** will be automatically **deleted** from shared folders!
-
-    For this reason, if we have run the analysis in a shared folder such as */mnt/new_home/element_common_fastq*, we should transfer the final files to our **own** subfolder, which will be located under our research group's folder.
-
-    ``` bash
-    rsync -r \
-    2025_05_21_ERIC_study \
-    /mnt/new_home/stamatopoulos_research
-    ```
+```bash
+rsync -r \
+2025_05_21_ERIC_study \
+/mnt/new_home/stamatopoulos_research
+```
