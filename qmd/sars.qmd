@@ -71,11 +71,7 @@ o `Ctrl + x`: Exits and returns to the terminal
 You have to **update** with the right path.
 
 ``` bash
-nohup bash runCOVID19.sh \
-/mnt/new_home/stamatopoulos_research/SARS_2025_05_21 \
-SampleList \
-/work/covid19-runs/ref/NC_045512.2.fasta \
-&
+nohup bash runCOVID19.sh /mnt/new_home/stamatopoulos_research/SARS_2025_05_21 SampleList /work/covid19-runs/ref/NC_045512.2.fasta &
 ```
 
 ### 10. After the analysis is completed
@@ -87,7 +83,5 @@ cd ..
 ```
 
 ``` bash
-rsync -r \
-SARS_2025_05_21 \
-/mnt/new_home/stamatopoulos_research
+rsync -r SARS_2025_05_21 /mnt/new_home/stamatopoulos_research
 ```
