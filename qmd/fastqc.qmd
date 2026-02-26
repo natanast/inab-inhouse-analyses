@@ -35,11 +35,11 @@ cd /work/folder_of_each_user/fastqc_2025_05_21
 ### 6. Download script to your analysis directory
 
 ``` bash
-wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/fastqc.sh
+wget https://raw.githubusercontent.com/BiodataAnalysisGroup/RNAseq_analysis/main/bash/fastqc.sh
 ```
 
 ``` bash
-wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/runFASTQC.sh 
+wget https://raw.githubusercontent.com/BiodataAnalysisGroup/RNAseq_analysis/main/bash/runFASTQC.sh 
 ```
 
 ### 7. Create a SampleList
