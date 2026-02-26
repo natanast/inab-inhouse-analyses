@@ -47,7 +47,7 @@ wget https://raw.githubusercontent.com/natanast/RNAseq_analysis/main/bash/runFAS
 You have to **update** with the right path to your **fastq files**.
 
 ``` bash
-ls -la /mnt/new_home/stamatopoulos_research/RNAseq_2025_05_21 | awk '{print $9}' | awk -F "_R" '{print $1}' | sort | uniq > SampleList
+ls -la /mnt/new_home/stamatopoulos_research/2025_05_21_ERIC_study | awk '{print $9}' | awk -F "_R" '{print $1}' | sort | uniq > SampleList
 ```
 
 ### 8. Remove samples that should not be analyzed:
@@ -71,7 +71,7 @@ o `Ctrl + x`: Exits and returns to the terminal
 You have to **update** with the right path.
 
 ``` bash
-nohup bash runSTAR.sh /mnt/new_home/stamatopoulos_research/RNAseq_2025_05_21 SampleList 16 &
+nohup bash runFASTQC.sh /mnt/new_home/stamatopoulos_research/2025_05_21_ERIC_study SampleList 16 &
 ```
 
 ### 10. After the analysis is completed
